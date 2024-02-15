@@ -1,0 +1,10 @@
+#include "tokenizer.c"
+
+int main()
+{
+  printf(space_char('\t'));
+  printf(space_char(' '));
+  printf(non_space_char(' '));
+  printf(non_space_char('c'));
+  return 0;
+}
