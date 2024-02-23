@@ -1,5 +1,6 @@
 
 #include "tokenizer.h"
+#include <string.h>
 
 int space_char(char c)
 {
@@ -19,12 +20,15 @@ int non_space_char(char c)
 
 char *token_start(char *str)
 {
-  while( *str != '\0'){ //all strings aka char arrays end with the '\0'
+  int index = 1;
+  while( *str[index] != '\0' ){ //all strings aka char arrays end with the '\0'
     
-   if( space_char(*str) ){
-      return *str;
+   if( space_char(*str[index]) ){//if you find a space in the char[]
+     return *str[index+1];//return the next value which is the start of the next token
    }
-   *str += 1;
+   index++;
   }
-  return *str;
+  return 0;
 }
+
+
