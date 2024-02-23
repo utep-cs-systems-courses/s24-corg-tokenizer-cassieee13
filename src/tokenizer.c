@@ -43,4 +43,15 @@ char *token_terminator(char *token)
   return 0;
 }
 
+int count_tokens(char *str)
+{
+  if( str[0] == '\0' ){
+    return 0;
+  }
+  if( token_terminator(str)+1 == '\0'){
+    return 1;
+  }
+  //my approach here is to recursively return the count of tokens.
+  return 1 + count_tokens( token_start( str) );
+}
 

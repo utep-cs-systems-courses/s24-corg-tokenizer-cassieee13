@@ -11,7 +11,8 @@ int main( )
   //printf("Your input was: %s", input);
   char str[] = "Hello World";
   char* point = str;
-  printf("the value inside input: %c\n", point[0]);
+  printf("the value of first char: %c\n", point[0]);
 
-  printf("0 for no, 1 for yes: %d\n", token_terminator( point ) );
+  printf("the value of the end of token: %c\n", token_terminator( point ) );
+  printf("how many tokens in this string?: %d\n", count_tokens( str) );
 }
