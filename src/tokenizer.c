@@ -20,38 +20,38 @@ int non_space_char(char c)
 
 char *token_start(char* str)
 {
-  int index = 0;
-  while( str[index] != '\0' ){ //all strings aka char arrays end with the '\0'
-    
-   if( space_char( str[index]) ){//if you find a space in the char[]
-     return str[index+1];//return the next value which is the start of the next token
-   }
-   index++;
+  char *p;
+  for( p = str; *p != '\0'; ++p){ //this loop will iterate over the char[], until it finds a space.
+    if( space_char( *p ) ){
+      return ++p;//previously I had p++ and it was returning the address of the space
+     }
   }
   return 0;
 }
 
 char *token_terminator(char *token)
 {
-  int index = 0;
-  while( token[index] != '\0' ){
-   if( space_char( token[index] )){
-     return token[index-1]; //when it finds the space, that means the token has ended.
-   }
-   index++;
+  char *p;
+  for( p = token; *p != '\0'; ++p ){
+    if( space_char( *p ) ){
+      return --p;//similarly, this methods finds the space and returns the previous value
+    }
   }
-  return 0;
+    return 0;
 }
 
 int count_tokens(char *str)
 {
-  if( str[0] == '\0' ){
-    return 0;
+  char *p;
+  int count = 0;
+  char *start;
+  for( p = str; *p != '\0'; p++){
+    p = token_start( p );
+    if( p == 0){//meaning it reached the end of the string because token_start returns 0 
+      return count+1;
+    }
+    count++;
   }
-  if( token_terminator(str)+1 == '\0'){
-    return 1;
-  }
-  //my approach here is to recursively return the count of tokens.
-  return 1 + count_tokens( token_start( str) );
+  return count;
 }
 

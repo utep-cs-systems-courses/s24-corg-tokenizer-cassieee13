@@ -10,9 +10,14 @@ int main( )
   // fgets(input, MAX_INPUT_LEN, stdin);
   //printf("Your input was: %s", input);
   char str[] = "Hello World";
-  char* point = str;
+  char* point = &str[0];
   printf("the value of first char: %c\n", point[0]);
-
-  printf("the value of the end of token: %c\n", token_terminator( point ) );
-  printf("how many tokens in this string?: %d\n", count_tokens( str) );
+  printf("the value of point %p\n", point );
+  printf("the value stored inside point %c\n", *point );
+  
+  char *start = token_start(point);
+  printf("start value: %c\n", *start);
+  char *terminator = token_terminator( point );
+  printf("terminator value: %c\n", *terminator);
+  printf("how many tokens in this string?: %d\n", count_tokens( point) );
 }
