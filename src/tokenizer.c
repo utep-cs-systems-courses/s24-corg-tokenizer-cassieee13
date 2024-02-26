@@ -55,3 +55,15 @@ int count_tokens(char *str)
   return count;
 }
 
+char *copy_str(char *inStr, short len)
+{
+  int i;
+  char str[len];
+  char *p = inStr;
+  for( i = 0; i < len; i++){
+    str[i] = *p;
+    printf("stored %c in str\n", *p);
+    ++p;
+  }
+  return &str;
+}
