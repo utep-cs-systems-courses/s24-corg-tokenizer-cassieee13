@@ -13,14 +13,19 @@ int main( )
   char* point = &str[0];
   printf("the value of first char: %c\n", point[0]);
   printf("the value of point %p\n", point );
-  printf("the value stored inside point %c\n", *point );
+  printf("the value stored inside point %c\n", *point);
   
   char *start = token_start(point);
   printf("start value: %c\n", *start);
-  char *terminator = token_terminator( point );
+  char *terminator = token_terminator( point);
   printf("terminator value: %c\n", *terminator);
+  
   printf("how many tokens in this string?: %d\nExpected: 11\n", count_tokens( point) );
   short len = 5;
+  printf("ptr value: %d", *point);
   char *copy = copy_str( point, len );
-  printf("the value of copy_str: %s", *copy);
+  printf("the value of copy_str: %s\nExpected: Hello\n", copy);
+  len = 3;
+  copy = copy_str( point, len);
+  printf("the value of copy_str: %s\nExpected: Hel\n", copy);
 }

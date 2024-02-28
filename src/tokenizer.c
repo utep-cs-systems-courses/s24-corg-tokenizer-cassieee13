@@ -1,6 +1,6 @@
 
 #include "tokenizer.h"
-#include <string.h>
+#include <stdlib.h>
 
 int space_char(char c)
 {
@@ -57,13 +57,20 @@ int count_tokens(char *str)
 
 char *copy_str(char *inStr, short len)
 {
+  //reviewed malloc on geeksforgeeks.com
+  char *copy;
   int i;
-  char str[len];
-  char *p = inStr;
-  for( i = 0; i < len; i++){
-    str[i] = *p;
-    printf("stored %c in str\n", *p);
-    ++p;
+  //cast type malloc(byte size)
+  copy = (char *) malloc(len+1);
+  if( copy == NULL ){
+    printf("I made it here");
+    return 0;
   }
-  return &str;
+  for( i = 0; i < len; i++){
+    printf("stored %c in str\n", *inStr);
+    copy = inStr;
+    copy++; inStr++;
+  }
+  copy[len+1] = '\0';
+  return copy;
 }
