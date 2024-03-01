@@ -22,7 +22,7 @@ int main( )
   
   printf("how many tokens in this string?: %d\nExpected: 11\n", count_tokens( point) );
   short len = 5;
-  printf("ptr value: %d", *point);
+  printf("ptr value: %d\n", *point);
   char *copy = copy_str( point, len );
   printf("the value of copy_str: %s\nExpected: Hello\n", copy);
   len = 3;

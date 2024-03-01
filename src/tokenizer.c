@@ -61,16 +61,26 @@ char *copy_str(char *inStr, short len)
   char *copy;
   int i;
   //cast type malloc(byte size)
-  copy = (char *) malloc(len+1);
+  copy = malloc((len+1)* sizeof(char)) ;
   if( copy == NULL ){
     printf("I made it here");
     return 0;
   }
-  for( i = 0; i < len; i++){
-    printf("stored %c in str\n", *inStr);
-    copy = inStr;
-    copy++; inStr++;
+  //influenced by bstInsert
+  for( i=0; i < len; i++){
+    *(copy+i) = *(inStr + i);
   }
-  copy[len+1] = '\0';
   return copy;
+}
+//needs to return an array of each token in the string
+char **tokenize(char *str)
+{
+  int i;
+  int j;
+  int count = count_tokens(*str);
+  int countLetters;
+  char tokens[count];
+  for (i = 0; i <= count; i++){
+    for(j = 0; j <  
+  }
 }
