@@ -28,4 +28,7 @@ int main( )
   len = 3;
   copy = copy_str( point, len);
   printf("the value of copy_str: %s\nExpected: Hel\n", copy);
+  
+  char ** tokens = tokenize( "hello world string" );
+  print_tokens(tokens);
 }
