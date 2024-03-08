@@ -31,4 +31,5 @@ int main( )
   
   char ** tokens = tokenize( "hello world string" );
   print_tokens(tokens);
+  free_tokens(tokens);
 }

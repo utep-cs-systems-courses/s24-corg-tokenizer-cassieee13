@@ -117,11 +117,32 @@ char **tokenize(char *str)
   return tokens;
 }
 
-void print_tokens( char ** tokens) {
+void print_tokens( char **tokens)
+{
   int i = 0;
   while( tokens[i] != 0){
-    printf("%s ",( tokens[i]) );
+    printf( "%s ", tokens[i] );
     i++;
   }
   printf("\n");
+}
+
+void free_tokens( char **tokens)
+{
+  //printf("%s", *tokens);
+  //free(tokens);
+  int i = 0;
+  char **temp;
+  while( tokens[i] != 0){
+    i++;
+  }
+  printf("i: %d\n", i);
+  for( int j = i; j > 0; j--){//I tried a for loop that incremented and it was producing an error
+    printf("freed with value: %s\n", tokens[j] );
+    free( tokens[j] );
+  }
+  printf("freed with value: %s\n", tokens[0] );
+  free( tokens );
+  
+  printf("tokens have successfully been freed\n" );
 }
