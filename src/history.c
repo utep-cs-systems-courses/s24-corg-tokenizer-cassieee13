@@ -2,40 +2,80 @@
 #include "tokenizer.h"
 #include <stdlib.h>
 
-s_Item * rootM = 0;
-s_List* history = NULL;
+Item *rootM = NULL;
+List *history = NULL;
 /* 
-   s_list: s_item *root
-   s_item: int id, char *str, s_item* next 
+   list: s_item *root
+   item: int id, char *str, s_item* next 
 */
 List* init_history()
 {
-  if( *history == NULL){
-    s_List *hist = malloc( sizeof(s_List) );
-    history = &hist; 
-    history->root = *rootM;
-    
+  if( history == NULL){ //if you have never initialized history, then the list is empty
+    List *hist = malloc( sizeof(List) );
+    history = hist; 
+    history->root = rootM; //this function creates a brand new list with a empty node. 
   }
+  
 }
 
-List* add_history(List *list, char* str){
-  if( history->root == 0){
-    s_Item *newItem = malloc( sizeof(s_Item) );
-    newItem->next = 0;
-    newItem->id = 1;
+void add_history(List *list, char* str){
+  if( list->root == NULL){ //in a new list, the root node is equal to NULL
+    Item *newItem = malloc( sizeof(Item) );
+    newItem->next = NULL;
+    newItem->id = 1;//i am guessing id is the index of the node in the list
 
-    int len = count_tokens( str ); sindex = 0;
+    int len = count_tokens( str ); int sindex = 0;
     char* scopy = malloc( (len+1) * sizeof(char) ), c;
     do{
       c = *(scopy + sindex) = *(str + sindex);
-      sindex++;
+      sindex++;//inspiration from the bst.c
     }while (c);
     newItem->str = scopy;
-    *rootM = newItem;
+    list->root = newItem;
   }
   else{
-    s_Item curr = &(history->root);
-    if( curr->next == 0 ){
-      c
+    Item *newItem = malloc( sizeof(Item) );
+    Item *curr = malloc( sizeof(Item) );
+    curr = list->root;
+    while( (curr->next) != NULL){ //this should traverse the linked list
+      curr = curr->next;
+    }
+    newItem->id = (curr->id)+1;//set the id attribute
+    int len = count_tokens( str ); int sindex = 0;
+    char* scopy = malloc( (len+1) * sizeof(char) ), c;
+    do{
+      c = *(scopy + sindex ) = *(str + sindex);
+      sindex++;
+    }while(c);
+    newItem->str = scopy;//set the str attribute
+    curr->next = newItem;//maintained the linked list.
+    newItem->next = NULL;//set the next attribute
+    //newItem id, str, and next have been set.
   }
 }
+
+char* get_history( List *list, int id){
+  Item curr = malloc( sizeof(Item) );
+  curr = list->root;
+  while( curr->next != NULL) {
+    if( curr->id == id){
+      return curr->str;
+    }
+    curr = curr->next;//move the pointer forward
+  }
+  printf("there is not that many nodes");
+  return 0;
+}
+
+void print_history(List *list){
+  Item curr = malloc( sizeof( Item ) );
+  curr = list->root;
+  while( curr->next != NULL ){
+    print_tokens( curr->str);
+    printf("\n");
+    curr = curr->next; //move forward
+  }
+  return;
+}
+
+void free_history(List *list)
