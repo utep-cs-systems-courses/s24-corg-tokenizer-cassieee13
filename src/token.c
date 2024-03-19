@@ -1,35 +1,20 @@
 #include <stdio.h>
-#include "tokenizer.c"
+#include "tokenizer.h"
+#include "history.h"
 
-#define MAX_INPUT_LEN 100
-int main( )
+int main(int argc, char **argv )
 {
-  char input[MAX_INPUT_LEN];
+  List* history = init_history();
+  printf("The program name is <%s>\n", *(argv+0) );
+  for( char **p = &argv[1]; *p; p++){
+    add_history( history, *p);
+  }
+  print_history( history );
+  free_history( history );
+  //char *p = input;
+  //char **tokens = tokenize( p );
+  //print_tokens( tokens );
+  //free_tokens( tokens );
   
-  printf("The program name is Tokenizer. Please input a message:\n> ");
-  // fgets(input, MAX_INPUT_LEN, stdin);
-  //printf("Your input was: %s", input);
-  char str[] = "Hello World my name is Cassandra Alvarez this is my test";
-  char* point = &str[0];
-  printf("the value of first char: %c\n", point[0]);
-  printf("the value of point %p\n", point );
-  printf("the value stored inside point %c\n", *point);
   
-  char *start = token_start(point);
-  printf("start value: %c\n", *start);
-  char *terminator = token_terminator( point);
-  printf("terminator value: %c\n", *terminator);
-  
-  printf("how many tokens in this string?: %d\nExpected: 11\n", count_tokens( point) );
-  short len = 5;
-  printf("ptr value: %d\n", *point);
-  char *copy = copy_str( point, len );
-  printf("the value of copy_str: %s\nExpected: Hello\n", copy);
-  len = 3;
-  copy = copy_str( point, len);
-  printf("the value of copy_str: %s\nExpected: Hel\n", copy);
-  
-  char ** tokens = tokenize( "hello world string" );
-  print_tokens(tokens);
-  free_tokens(tokens);
 }

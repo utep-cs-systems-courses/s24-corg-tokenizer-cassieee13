@@ -1,6 +1,6 @@
-
 #include "tokenizer.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 int space_char(char c)
 {

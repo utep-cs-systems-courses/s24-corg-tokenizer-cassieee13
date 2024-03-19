@@ -1,6 +1,7 @@
 #include "history.h"
 #include "tokenizer.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 Item *rootM = NULL;
 List *history = NULL;
@@ -55,7 +56,7 @@ void add_history(List *list, char* str){
 }
 
 char* get_history( List *list, int id){
-  Item curr = malloc( sizeof(Item) );
+  Item *curr = malloc( sizeof(Item) );
   curr = list->root;
   while( curr->next != NULL) {
     if( curr->id == id){
@@ -68,14 +69,29 @@ char* get_history( List *list, int id){
 }
 
 void print_history(List *list){
-  Item curr = malloc( sizeof( Item ) );
+  Item *curr = malloc( sizeof( Item ) );
+  char **tokens = malloc( sizeof(char**) );
   curr = list->root;
   while( curr->next != NULL ){
-    print_tokens( curr->str);
-    printf("\n");
+    tokens = tokenize(curr->str); //tokenize takes a char * as an argument and returns a char **
+    print_tokens( tokens );
     curr = curr->next; //move forward
   }
+  tokens = tokenize( curr->str );
+  print_tokens( tokens );
   return;
 }
 
-void free_history(List *list)
+void free_history(List *list){
+  if( list->root == NULL){
+    free(list);
+    return;
+  }
+  Item *curr = malloc( sizeof(Item) );
+  curr = list->root;
+  list->root = list->root->next;
+  //free_tokens( curr->str);
+  free( curr->str );
+  free( curr );
+  
+}
